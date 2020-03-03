@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run -e CI=true scsit/dk-react npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: # region of AWS
+  app: "dk-react"
+  env: "dk-react-env" # look up from AWS
+  bucket_name: # get from AWS
+  bucket_path: "dk-react"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "AWS_SECRET_KEY"
